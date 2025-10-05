@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staying in Bern - Community Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #581c87, #be185d, #c2410c);
+            position: relative;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .hero-content {
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero-emoji {
+            font-size: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 3rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            padding: 0;
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-dot.active {
+            width: 16px;
+            height: 16px;
+            background: white;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 1rem;
+        }
+
+        .section-content {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .content-box {
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .item {
+            display: flex;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            align-items: start;
+        }
+
+        .item-emoji {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+
+        .highlight-card {
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid;
+        }
+
+        .green-card {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: rgba(74, 222, 128, 1);
+        }
+
+        .yellow-card {
+            background: rgba(234, 179, 8, 0.3);
+            border-color: rgba(250, 204, 21, 1);
+        }
+
+        .blue-card {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(96, 165, 250, 1);
+        }
+
+        .purple-card {
+            background: rgba(168, 85, 247, 0.3);
+            border-color: rgba(192, 132, 252, 1);
+        }
+
+        .highlight-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .final-message {
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 2;
+        }
+
+        .big-message {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Section-specific backgrounds */
+        #section0 {
+            background: linear-gradient(135deg, #000 0%, #1e3a8a 100%);
+        }
+
+        #section1 {
+            background: linear-gradient(135deg, #1e3a8a 0%, #581c87 100%);
+        }
+
+        #section2 {
+            background: linear-gradient(135deg, #581c87 0%, #831843 100%);
+        }
+
+        #section3 {
+            background: linear-gradient(135deg, #831843 0%, #064e3b 100%);
+        }
+
+        #section4 {
+            background: linear-gradient(135deg, #064e3b 0%, #7f1d1d 100%);
+        }
+
+        #section5 {
+            background: linear-gradient(135deg, #7f1d1d 0%, #581c87 100%);
+        }
+
+        #section6 {
+            background: linear-gradient(135deg, #581c87 0%, #be185d 100%);
+        }
+
+        .color-yellow {
+            color: #fcd34d;
+        }
+
+        .color-cyan {
+            color: #67e8f9;
+        }
+
+        .color-purple {
+            color: #c084fc;
+        }
+
+        .color-green {
+            color: #6ee7b7;
+        }
+
+        .color-pink {
+            color: #f9a8d4;
+        }
+
+        .color-orange {
+            color: #fdba74;
+        }
+
+        .color-indigo {
+            color: #a5b4fc;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.25rem;
+            transition: all 0.3s;
+        }
+
+        .grid-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            .content-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Staying in Bern</h1>
+            <p class="hero-subtitle">Community Guide</p>
+            <div class="hero-emoji">🌍💛</div>
+        </div>
+        <div class="scroll-hint" id="scrollHint">↓</div>
+    </div>
+
+    <div class="nav-dots" id="navDots">
+        <button class="nav-dot active" onclick="scrollToSection(0)"></button>
+        <button class="nav-dot" onclick="scrollToSection(1)"></button>
+        <button class="nav-dot" onclick="scrollToSection(2)"></button>
+        <button class="nav-dot" onclick="scrollToSection(3)"></button>
+        <button class="nav-dot" onclick="scrollToSection(4)"></button>
+        <button class="nav-dot" onclick="scrollToSection(5)"></button>
+        <button class="nav-dot" onclick="scrollToSection(6)"></button>
+    </div>
+
+    <section id="section0">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(251, 191, 36, 0.2);">
+                <h2 class="color-yellow">About Us</h2>
+                <p>Our dream is simple: we want to bring people together in a warm, social, and open space — real connection, no business, no strange vibes 🌍💛</p>
+                <p>We are a free, non-profit community in Bern, open to everyone 👫✨. Our place is run collectively, with the goal of creating a welcoming home where people can meet, share, and feel safe — something that can be hard to find, especially while traveling 🧳💖.</p>
+                <p>Life here is flexible and not very formal 🌀. The space works because everyone contributes and helps one another 🤗💪.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="section1">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(59, 130, 246, 0.2);">
+                <h2 class="color-cyan">Daily Life 🌞🌙</h2>
+                
+                <h3>🏠 Living together feels better when…</h3>
+                <div class="item">
+                    <span class="item-emoji">🧹</span>
+                    <p>We do a quick morning clean-up :) hola so the day starts fresh (sometime between 8 and 9 am, the earlier the better!) ✨</p>
+                </div>
+                <div class="item">
+                    <span class="item-emoji">🌜</span>
+                    <p>Around 9 pm we start preparing the space for a calm night</p>
+                </div>
+                <div class="item">
+                    <span class="item-emoji">🛌</span>
+                    <p>By 10 pm everything is ready for sleep</p>
+                </div>
+                <div class="item">
+                    <span class="item-emoji">🤫</span>
+                    <p>The official <strong>quiet hours</strong> begin at 11 pm (you can go to sleep earlier if you want)</p>
+                </div>
+                <div class="item">
+                    <span class="item-emoji">💖</span>
+                    <p>We all help keep things pleasant and welcoming</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Shared Responsibilities 👫💫</h3>
+                <div class="info-box">
+                    <p>🧽 Taking care of your own mess</p>
+                    <p>🧹 Helping with morning cleaning</p>
+                    <p>🔧 Fixing and improving little things around the house</p>
+                    <p>♻️ Recycling, trash, small repairs, and keeping common areas cozy</p>
+                    <p style="margin-bottom: 0;">🌸 Welcoming new friends and making the house feel like home</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section2">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(168, 85, 247, 0.2);">
+                <h2 class="color-purple">📢 Communication</h2>
+                <p style="font-size: 1rem; opacity: 0.8;">Tasks and Contributions</p>
+                
+                <div class="grid">
+                    <div class="grid-item"><p>📱 Checking volunteer platforms</p></div>
+                    <div class="grid-item"><p>💬 Replying to WhatsApp, Facebook, Instagram messages</p></div>
+                    <div class="grid-item"><p>✍️ Updating online profiles</p></div>
+                    <div class="grid-item"><p>📣 Posting events and updates (Meetup, Facebook, etc.)</p></div>
+                    <div class="grid-item"><p>🌟 Reaching out to potential volunteers</p></div>
+                    <div class="grid-item"><p>🔎 Finding useful free resources online</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section3">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(34, 197, 94, 0.2);">
+                <h2 class="color-green">💻 Software Development</h2>
+                <p style="font-size: 1rem; opacity: 0.8;">Tasks and Contributions</p>
+                
+                <div class="item"><p>⚡ Maintaining and improving the website</p></div>
+                <div class="item"><p>🤖 Automating workflows</p></div>
+                <div class="item"><p>⏱ Monitoring site performance</p></div>
+                <div class="item"><p>🔑 Managing user accounts</p></div>
+                <div class="item"><p>🛠 Troubleshooting issues</p></div>
+                <div class="item"><p>🔒 Supporting integrations & security</p></div>
+                <div class="item"><p>🚀 Suggesting efficiency solutions</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section4">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(236, 72, 153, 0.2);">
+                <h2 class="color-pink">🏡 House Coordination</h2>
+                <p style="font-size: 1rem; opacity: 0.8;">Tasks and Contributions</p>
+                
+                <div class="item"><p>✨ Making sure common areas stay clean and organized</p></div>
+                <div class="item"><p>♻️ Recycling and trash management</p></div>
+                <div class="item"><p>🚿🍳 Bathrooms and kitchen hygiene</p></div>
+                <div class="item"><p>🛏 Weekly sheets & towels</p></div>
+                <div class="item"><p>🔧 Following up on small repairs</p></div>
+                <div class="item"><p>💖 Coordinating so everyone shares the responsibility</p></div>
+
+                <div class="info-box">
+                    <p>The focus is on coordination and awareness, not doing everything yourself. It's about helping everyone keep the house nice together 💖.</p>
+                </div>
+
+                <div class="info-box">
+                    <p style="margin-bottom: 0;">There's always something to do — you can check the daily "issues" in the app we use, and volunteers are welcome to try tasks from areas outside their main focus if they want to learn or help in different ways 🌟. What matters most is staying active 💪, supportive 🤗, and enjoying the process 🌈 of moving the project forward!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section5">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(239, 68, 68, 0.2);">
+                <h2 class="color-orange">Before You Come 📞💬</h2>
+                
+                <p style="font-size: 1.3rem; font-weight: 600;">To avoid misunderstandings:</p>
+
+                <div class="highlight-card green-card">
+                    <h4>✅ Confirm with us first:</h4>
+                    <p style="margin-bottom: 0;">do not come without a short video call with one of us where we confirm your arrival.</p>
+                </div>
+
+                <div class="highlight-card yellow-card">
+                    <h4>🔄 Have a backup plan:</h4>
+                    <p style="margin-bottom: 0;">Even if we told you that you can come, please have an alternative in case something unexpected happens.</p>
+                </div>
+
+                <div class="highlight-card blue-card">
+                    <h4>📝 Feedback round:</h4>
+                    <p style="margin-bottom: 0;">After the first two days, we do a feedback round to see how everything is working. In more than 90% of cases, everything flows smoothly 😊. However, if living together proves difficult, or if there is no real commitment to help, we cannot continue hosting people where the dynamics don't work well for the group 🚫. This helps keep the project healthy and enjoyable for everyone 💛.</p>
+                </div>
+
+                <div class="highlight-card purple-card">
+                    <h4>🚪 Arrival coordination:</h4>
+                    <p style="margin-bottom: 0;">Be sure that before you come someone confirmed they will be there to open the door. If they are not there, please don't wait outside — come back later 🙂.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section6">
+        <div class="section-content">
+            <div class="content-box" style="background: rgba(99, 102, 241, 0.2); text-align: center;">
+                <h2 class="color-indigo">Final Note 🌻💖</h2>
+                
+                <div class="final-message">
+                    <p>✨ What matters most is enjoying the experience together while staying active in moving the project forward.</p>
+                    <p>🌈 Everyone is welcome here. The community works thanks to the active participation of everyone.</p>
+                    <p>🤗 The help is flexible and shared — you don't need to be an expert, just contribute where you feel comfortable, learn from others, and support the group 🌟.</p>
+                    <p class="big-message">We can't wait to meet you and share a great time together! 🎉💛</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let sections = [];
+        let currentSection = 0;
+
+        window.addEventListener('load', () => {
+            sections = document.querySelectorAll('section');
+        });
+
+        window.addEventListener('scroll', () => {
+            // Hide scroll hint after first scroll
+            const scrollHint = document.getElementById('scrollHint');
+            if (window.scrollY > 100) {
+                scrollHint.style.opacity = '0';
+            }
+
+            // Update active dot
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            sections.forEach((section, index) => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                
+                if (scrollPosition >= top && scrollPosition <= bottom) {
+                    currentSection = index;
+                    updateDots();
+                }
+            });
+        });
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentSection) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function scrollToSection(index) {
+            sections[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
